@@ -1,13 +1,13 @@
 import { createStackNavigator } from 'react-navigation-stack'
-import SignIn from '../screens/Signin/SignIn'
+import ChatScreen from '../screens/ChatRoom/ChatScreen'
 
 const screens = {
-    SigninScreen: {
-        screen: SignIn
+    ChatScreen: {
+        screen: ChatScreen
     }
 }
 
-const SigninStack = createStackNavigator(screens, {
+const ChatStack = createStackNavigator(screens, {
     defaultNavigationOptions: {
         headerShown: 'none',
         headerStyle: {
@@ -19,4 +19,4 @@ const SigninStack = createStackNavigator(screens, {
     }
 })
 
-export default SigninStack
+export default ChatStack

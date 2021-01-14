@@ -1,10 +1,10 @@
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createAppContainer } from 'react-navigation'
-import SigninStack from './SigninStack'
+import ChatStack from './ChatScreenStack'
 
 const RootDrawerNavigator = createDrawerNavigator({
-    SignIn: {
-        screen: SigninStack
+    Chat: {
+        screen: ChatStack
     }
 })
 
