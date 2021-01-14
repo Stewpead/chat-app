@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "mobilechat68bcbc59": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
