@@ -1,59 +1,46 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useRef, useState, useEffect } from 'react'
+import { View, Text, TextInput, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { withAuthenticator } from 'aws-amplify-react-native'
-import { Auth } from 'aws-amplify'
+import { API, Auth, graphqlOperation, Hub } from 'aws-amplify'
+
+import ChatRoom from './ChatRoom'
+
+import { listChatApps } from '../../graphql/queries';
+import { createChatApp } from '../../graphql/mutations';
+
+// import SendIcon from '@material-ui/icons/Send';
 
 const ChatScreen = () => {
+    
+    const [ messages, setMessages ] = useState([])
 
-    function ChatRoom () {
+      async function sendMsg() {
 
-        const dummy = useRef()
-        const messageRef = firestore.collection('messages')
-        const query = messageRef.orderBy('createdAt').limit(25)
-        const [messages] = useCollectionData(query, {idField: 'id'})
-        const [ formValue, setFormValue ] = useState('');
-      
-        const sendMessage = async(e) => {
-          e.preventDefault()
-          const { uid, photoURL } = auth.currentUser
-          await messageRef.add({
-            text: formValue,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            uid,
-            photoURL
-          })
-          setFormValue('')
-          dummy.current.scrollIntoView({ behavior: 'smooth'})
+        let input = {
+            "text": "Test 3",
+            "createdAt": 1610523985,
+            "photoURL": "WTF"
         }
-      
 
-        return(
-          <>
-            <h1>Chat Room</h1>
-            {messages && messages.map( msg => <ChatMessage key={msg.id} message={msg} />)}
-            <div ref={dummy}></div>
-            <form onSubmit={sendMessage}>
-              <input value={formValue} onChange={(e) => setFormValue(e.target.value)}/>
-              <button type="submit">Send</button>
-            </form>
-          </>
-        )
+        try {
+            await API.graphql(graphqlOperation(createChatApp, { input }))
+        } catch (error) {
+            console.log("send message error: ", error)
+        }
+
       }
 
-      function ChatMessage( props ) {
-        const { text, uid, photoURL } = props.message;
-        const messageClass = uid === auth.currentUser.uid ? 'sent': 'received';
-      
-        return (
-          <div className={`message ${messageClass}`}>
-            <img src={photoURL} height={30} width={30}/>
-            <p style={{color: '#fff'}}>{text}</p>
-          </div>
-        )
+      async function getAllMessage() {
+        try {
+            const res = await API.graphql(graphqlOperation(listChatApps))
+            setMessages(res.data.listChatApps.items)
+        } catch( error) {   
+            console.log('Error: ', error)
+        }
       }
-      
+
       async function signOut() {
         try {
             await Auth.signOut();
@@ -62,11 +49,19 @@ const ChatScreen = () => {
         }
     }
 
+    useEffect( () => {
+        getAllMessage()
+    })
+
     return (
-        <View>
+        <View style={{justifyContent: 'center'}}>
             <TouchableOpacity onPress={signOut}>
                 <Text>Sign out</Text>
             </TouchableOpacity>
+            {/* <TouchableOpacity onPress={sendMsg}>
+                <Text>Test Send</Text>
+            </TouchableOpacity>
+            <ChatRoom /> */}
         </View>
     )
 }
