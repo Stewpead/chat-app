@@ -1,43 +1,53 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React,{ useRef, useState } from 'react'
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { API, graphqlOperation } from 'aws-amplify'
+import { createChatApp } from '../../graphql/mutations';
 
 import ChatMessage from './ChatMessage'
 
-function ChatRoom () {
-
-    const dummy = useRef()
+function ChatRoom (props) {
     const [ text, setText ] = useState('');
-  
-    const sendMessage = async(e) => {
-      e.preventDefault()
-      const { uid, photoURL } = auth.currentUser
-      await messageRef.add({
-        text: formValue,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        uid,
-        photoURL
-      })
-      setFormValue('')
-      dummy.current.scrollIntoView({ behavior: 'smooth'})
+    // const [ timeFormat, setTimeFormat ] = useState('')
+    let { messages, currentUser } = props
+    const dummy = useRef()
+
+    
+    async function sendMsg() {
+
+        var today = new Date().getTime();
+        let input = {
+            "uid" : currentUser,
+            "text": text,
+            "createdAt": today,
+            "photoURL": "n/a"
+        }
+
+        try {
+            await API.graphql(graphqlOperation(createChatApp, { input }))
+        } catch (error) {
+            console.log("send message error: ", error)
+        }
+        setText('')
+        dummy.current.scrollViewRef.scrollTo({ animated: true})
     }
-  
+
     return(
       <>
         <Text>Chat Room</Text>
-        {messages && messages.map( msg => <ChatMessage key={msg.id} message={msg} />)}
-        <View ref={dummy}></View>
-        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-            <TextInput style={{ height: 40, borderColor: 'gray', width: '80%', borderWidth: 1, paddingLeft: 10}}
-                onChangeText={text => setText(text)}
-                value={text}
-            />
-            <TouchableOpacity>
-                {/* <SendIcon /> */} 
-                <Text style={{ marginTop: 10, paddingLeft: 10}}>
-                    Send
-                </Text>
-            </TouchableOpacity>
-
+        {messages && messages.map( msg => <ChatMessage key={msg.id} message={msg} currentUser={currentUser} />)}
+        <ScrollView ref={dummy} />
+        <View style={{justifyContent: 'center'}}>
+            <View style={{width: '100%', display: 'flex', flexDirection: 'row'}}>
+                <TextInput style={{ height: 40, borderColor: 'gray', width: '80%', borderWidth: 1, paddingLeft: 10}}
+                    onChangeText={text => setText(text)}
+                    value={text}
+                />
+                <TouchableOpacity onPress={sendMsg}>
+                    <Text style={{ marginTop: 10, paddingLeft: 10}}>
+                        Send
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
       </>
     )

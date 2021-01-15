@@ -15,22 +15,7 @@ import { createChatApp } from '../../graphql/mutations';
 const ChatScreen = () => {
     
     const [ messages, setMessages ] = useState([])
-
-      async function sendMsg() {
-
-        let input = {
-            "text": "Test 3",
-            "createdAt": 1610523985,
-            "photoURL": "WTF"
-        }
-
-        try {
-            await API.graphql(graphqlOperation(createChatApp, { input }))
-        } catch (error) {
-            console.log("send message error: ", error)
-        }
-
-      }
+    const [ currentUser, setCurrentUser ] = useState('')
 
       async function getAllMessage() {
         try {
@@ -39,6 +24,13 @@ const ChatScreen = () => {
         } catch( error) {   
             console.log('Error: ', error)
         }
+      }
+
+      async function getUser() {
+
+        Auth.currentAuthenticatedUser()
+        .then(user => setCurrentUser(user.username))
+        .catch(() => console.log("user: null"));
       }
 
       async function signOut() {
@@ -51,6 +43,7 @@ const ChatScreen = () => {
 
     useEffect( () => {
         getAllMessage()
+        getUser()
     })
 
     return (
@@ -58,10 +51,10 @@ const ChatScreen = () => {
             <TouchableOpacity onPress={signOut}>
                 <Text>Sign out</Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity onPress={sendMsg}>
-                <Text>Test Send</Text>
-            </TouchableOpacity>
-            <ChatRoom /> */}
+            <ChatRoom 
+                messages={messages} 
+                currentUser={currentUser}
+            />
         </View>
     )
 }
