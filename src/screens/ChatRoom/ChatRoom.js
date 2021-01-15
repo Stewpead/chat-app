@@ -11,7 +11,6 @@ function ChatRoom (props) {
     let { messages, currentUser } = props
     const dummy = useRef()
 
-    
     async function sendMsg() {
 
         var today = new Date().getTime();
