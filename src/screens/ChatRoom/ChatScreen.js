@@ -30,7 +30,7 @@ const ChatScreen = () => {
         .subscribe({next: chatData => {
             console.log("CHAT DATA", chatData.value.data.onCreateCreateChatApp)
             setNewMsg(chatData.value.data.onCreateCreateChatApp)
-            setMessages([...messages, newMsg])
+            setMessages([...messages, chatData.value.data.onCreateCreateChatApp])
         }}))
 
     }
