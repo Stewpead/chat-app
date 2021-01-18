@@ -17,7 +17,7 @@ const ChatScreen = () => {
     const [ currentUser, setCurrentUser ] = useState('')
     const [ subscription, setSubscription ] = useState('')
 
-    async function getAllMessage() {
+    const getAllMessage = () => {
 
         try {
             const res = await API.graphql(graphqlOperation(listCreateChatApps))
@@ -30,8 +30,7 @@ const ChatScreen = () => {
         .subscribe({next: chatData => {
             console.log("CHAT DATA", chatData.value.data.onCreateCreateChatApp)
             setNewMsg(chatData.value.data.onCreateCreateChatApp)
-            let updatedArray = messages.filter( msg => msg.id !== newMsg.id)
-            setMessages(updatedArray, ...newMsg)
+            setMessages([...messages, newMsg])
         }}))
 
     }
