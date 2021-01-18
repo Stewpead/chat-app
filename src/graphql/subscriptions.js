@@ -1,72 +1,39 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateChatApp = /* GraphQL */ `
-  subscription OnCreateChatApp(
-    $id: ID
-    $uid: String
-    $text: String
-    $createdAt: AWSTimestamp
-    $photoURL: String
-  ) {
-    onCreateChatApp(
-      id: $id
-      uid: $uid
-      text: $text
-      createdAt: $createdAt
-      photoURL: $photoURL
-    ) {
+export const onCreateCreateChatApp = /* GraphQL */ `
+  subscription OnCreateCreateChatApp {
+    onCreateCreateChatApp {
       id
-      uid
       text
+      uid
       createdAt
       photoURL
+      updatedAt
     }
   }
 `;
-export const onUpdateChatApp = /* GraphQL */ `
-  subscription OnUpdateChatApp(
-    $id: ID
-    $uid: String
-    $text: String
-    $createdAt: AWSTimestamp
-    $photoURL: String
-  ) {
-    onUpdateChatApp(
-      id: $id
-      uid: $uid
-      text: $text
-      createdAt: $createdAt
-      photoURL: $photoURL
-    ) {
+export const onUpdateCreateChatApp = /* GraphQL */ `
+  subscription OnUpdateCreateChatApp {
+    onUpdateCreateChatApp {
       id
-      uid
       text
+      uid
       createdAt
       photoURL
+      updatedAt
     }
   }
 `;
-export const onDeleteChatApp = /* GraphQL */ `
-  subscription OnDeleteChatApp(
-    $id: ID
-    $uid: String
-    $text: String
-    $createdAt: AWSTimestamp
-    $photoURL: String
-  ) {
-    onDeleteChatApp(
-      id: $id
-      uid: $uid
-      text: $text
-      createdAt: $createdAt
-      photoURL: $photoURL
-    ) {
+export const onDeleteCreateChatApp = /* GraphQL */ `
+  subscription OnDeleteCreateChatApp {
+    onDeleteCreateChatApp {
       id
-      uid
       text
+      uid
       createdAt
       photoURL
+      updatedAt
     }
   }
 `;

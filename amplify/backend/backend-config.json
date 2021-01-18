@@ -1,6 +1,24 @@
 {
+  "api": {
+    "mobilechat": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "description": "default"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
+  },
   "auth": {
-    "mobilechat68bcbc59": {
+    "mobilechat986559c9": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

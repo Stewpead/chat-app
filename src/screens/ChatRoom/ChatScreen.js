@@ -1,15 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { View, Text, TextInput, Image } from 'react-native'
+import { View, Text, TextInput, Image, StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { withAuthenticator } from 'aws-amplify-react-native'
 import { API, Auth, graphqlOperation } from 'aws-amplify'
-import { onCreateChatApp } from '../../graphql/subscriptions';
-
+import { onCreateCreateChatApp } from '../../graphql/subscriptions';
+import { listCreateChatApps } from '../../graphql/queries';
 import ChatRoom from './ChatRoom'
-
-import { listChatApps } from '../../graphql/queries';
-
 
 // import SendIcon from '@material-ui/icons/Send';
 
@@ -23,24 +20,19 @@ const ChatScreen = () => {
     async function getAllMessage() {
 
         try {
-            const res = await API.graphql(graphqlOperation(listChatApps))
-            setMessages(res.data.listChatApps.items)
-
-            setSubscription(API.graphql(graphqlOperation(onCreateChatApp))
-            .subscribe({next: chatData => {
-                
-                if( chatData.value.data.onCreateChatApp != null) {
-                    setNewMsg(chatData.value.data.onCreateChatApp)
-                    const prevMsg = messages.filter( chat => chat.id !== newMsg.id)
-                    setMessages(prevMsg, ...newMsg)
-                }
-
-                console.log("CHAT DATA: ", newMsg)
-            }}))
-           
+            const res = await API.graphql(graphqlOperation(listCreateChatApps))
+            console.log('response', res.data.listCreateChatApps.items)
+            setMessages(res.data.listCreateChatApps.items)
         } catch ( error ) {   
             console.log('Error: ', error)
         }
+        setSubscription(API.graphql(graphqlOperation(onCreateCreateChatApp))
+        .subscribe({next: chatData => {
+            console.log("CHAT DATA", chatData.value.data.onCreateCreateChatApp)
+            setNewMsg(chatData.value.data.onCreateCreateChatApp)
+            let updatedArray = messages.filter( msg => msg.id !== newMsg.id)
+            setMessages(updatedArray, ...newMsg)
+        }}))
 
     }
 
@@ -71,9 +63,9 @@ const ChatScreen = () => {
 
     return (
         <View style={{justifyContent: 'center'}}>
-            <View style={{}}>
+            <View style={styles.headerPart}>
                 <TouchableOpacity onPress={signOut}>
-                    <Text>Sign out</Text>
+                    <Text style={{color: '#fff'}}>Sign out</Text>
                 </TouchableOpacity>
             </View>
             <ChatRoom 
@@ -85,15 +77,15 @@ const ChatScreen = () => {
 }
 
 export default withAuthenticator(ChatScreen)
-// const [subscription, setSubscription]
 
-// const getAllMessage = async () => {
-// ...
-// setMessage(...items)
-// setSubscription(Api.graphql(tung subscribe).subscribe(next:setMessage(message, ...data)
-// }
-
-// useEffect( () => {
-//     return ()=>subscription.unsubscribe}[subscription]
-//     }
-// )
+const styles = StyleSheet.create({
+    headerPart: {
+        backgroundColor: '#181717',
+        height: 20,
+        minHeight: 15,
+        width: '100%',
+        top: 0,
+        display: 'flex',
+        alignItems: 'center'
+    }
+})

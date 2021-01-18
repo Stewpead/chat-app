@@ -1,36 +1,48 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createChatApp = /* GraphQL */ `
-  mutation CreateChatApp($input: CreateChatAppInput!) {
-    createChatApp(input: $input) {
+export const createCreateChatApp = /* GraphQL */ `
+  mutation CreateCreateChatApp(
+    $input: CreateCreateChatAppInput!
+    $condition: ModelCreateChatAppConditionInput
+  ) {
+    createCreateChatApp(input: $input, condition: $condition) {
       id
-      uid
       text
+      uid
       createdAt
       photoURL
+      updatedAt
     }
   }
 `;
-export const updateChatApp = /* GraphQL */ `
-  mutation UpdateChatApp($input: UpdateChatAppInput!) {
-    updateChatApp(input: $input) {
+export const updateCreateChatApp = /* GraphQL */ `
+  mutation UpdateCreateChatApp(
+    $input: UpdateCreateChatAppInput!
+    $condition: ModelCreateChatAppConditionInput
+  ) {
+    updateCreateChatApp(input: $input, condition: $condition) {
       id
-      uid
       text
+      uid
       createdAt
       photoURL
+      updatedAt
     }
   }
 `;
-export const deleteChatApp = /* GraphQL */ `
-  mutation DeleteChatApp($input: DeleteChatAppInput!) {
-    deleteChatApp(input: $input) {
+export const deleteCreateChatApp = /* GraphQL */ `
+  mutation DeleteCreateChatApp(
+    $input: DeleteCreateChatAppInput!
+    $condition: ModelCreateChatAppConditionInput
+  ) {
+    deleteCreateChatApp(input: $input, condition: $condition) {
       id
-      uid
       text
+      uid
       createdAt
       photoURL
+      updatedAt
     }
   }
 `;

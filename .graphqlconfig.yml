@@ -1,6 +1,6 @@
 projects:
-  AppSyncChat:
-    schemaPath: src/graphql/schema.json
+  mobilechat:
+    schemaPath: amplify/backend/api/mobilechat/build/schema.graphql
     includes:
       - src/graphql/**/*.js
     excludes:
@@ -11,7 +11,7 @@ projects:
         generatedFileName: ''
         docsFilePath: src/graphql
         region: eu-west-2
-        apiId: jjrfy4xixvgvtawe5m7w7v4gjq
+        apiId: null
         maxDepth: 2
 extensions:
   amplify:

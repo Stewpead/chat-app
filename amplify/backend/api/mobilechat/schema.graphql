@@ -1,0 +1,7 @@
+type CreateChatApp @model {
+  id: ID!
+  text: String!
+  uid: String!
+  createdAt: AWSTimestamp!
+  photoURL: String
+}

@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-mobilechat-dev-151025-authRole",
-      "UnauthRoleArn": "arn:aws:iam::243791119221:role/amplify-mobilechat-dev-151025-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::243791119221:role/amplify-mobilechat-dev-151025-authRole",
+      "AuthRoleName": "amplify-mobilechat-dev-14042-authRole",
+      "UnauthRoleArn": "arn:aws:iam::243791119221:role/amplify-mobilechat-dev-14042-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::243791119221:role/amplify-mobilechat-dev-14042-authRole",
       "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-mobilechat-dev-151025-deployment",
-      "UnauthRoleName": "amplify-mobilechat-dev-151025-unauthRole",
-      "StackName": "amplify-mobilechat-dev-151025",
-      "StackId": "arn:aws:cloudformation:eu-west-2:243791119221:stack/amplify-mobilechat-dev-151025/97582b60-5637-11eb-89c9-0aa2a17b5748",
-      "AmplifyAppId": "d20bxz6am4w5f"
+      "DeploymentBucketName": "amplify-mobilechat-dev-14042-deployment",
+      "UnauthRoleName": "amplify-mobilechat-dev-14042-unauthRole",
+      "StackName": "amplify-mobilechat-dev-14042",
+      "StackId": "arn:aws:cloudformation:eu-west-2:243791119221:stack/amplify-mobilechat-dev-14042/d3d3e530-5758-11eb-9856-02c8f3eb7de6",
+      "AmplifyAppId": "d1tcz0ifypilk9"
     },
     "categories": {
       "auth": {
-        "mobilechat68bcbc59": {}
+        "mobilechat986559c9": {}
       }
     }
   }

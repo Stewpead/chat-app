@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "mobilechat68bcbc59_identitypool_68bcbc59",
+    "identityPoolName": "mobilechat986559c9_identitypool_986559c9",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "mobile68bcbc59",
-    "userPoolName": "mobilechat68bcbc59_userpool_68bcbc59",
+    "resourceNameTruncated": "mobile986559c9",
+    "userPoolName": "mobilechat986559c9_userpool_986559c9",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "mobile68bcbc59_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "mobile986559c9_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "68bcbc59",
-    "resourceName": "mobilechat68bcbc59",
+    "sharedId": "986559c9",
+    "resourceName": "mobilechat986559c9",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
